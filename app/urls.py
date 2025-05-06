@@ -9,13 +9,24 @@ from rest_framework.routers import DefaultRouter
 
 from core.views import UserViewSet
 
+from core.views import AcessoriosViewSet, CorViewSet, ModeloViewSet, VeiculoViewSet 
+
 router = DefaultRouter()
 
 router.register(r'usuarios', UserViewSet, basename='usuarios')
 
+router.register(r"acessorios", AcessoriosViewSet)
+
+router.register(r"cores", CorViewSet)
+
+router.register(r"modelo", ModeloViewSet)
+
+router.register(r"veiculo", VeiculoViewSet)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # OpenAPI 3
+    
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path(
         'api/swagger/',
@@ -27,6 +38,5 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name='schema'),
         name='redoc',
     ),
-    # API
     path('api/', include(router.urls)),
 ]
